@@ -10,7 +10,7 @@ import (
 
 func executeActivity() {
    dir, err := os.Getwd()
-   cmd := exec.Command(dir + "update_ver.sh")
+   cmd := exec.Command(dir + "/update_ver.sh")
 
    err = cmd.Run()
 
