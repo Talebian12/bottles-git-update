@@ -10,15 +10,14 @@ import (
 
 func executeActivity() {
    dir, err := os.Getwd()
-   cmd := exec.Command("bash " + dir + "/update_ver.sh")
-
-   err = cmd.Run()
+   out, err := exec.Command("/bin/bash", dir + "/update_ver.sh").Output()
 
    if err != nil {
       log.Fatal(err)
    } else {
       fmt.Println("Pushed to repository, updated files")
    }
+   fmt.Printf("%s\n", out)
 }
 
 func main() {

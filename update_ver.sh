@@ -8,9 +8,18 @@ AURDIR="$(pwd)/bottles-git"
 GITDIR="$(pwd)/bottles-git-github"
 
 check () {
-  [[ ! -d $VERDIR ]] && git clone https://github.com/bottlesdevs/Bottles
-  [[ ! -d $AURDIR ]] && git clone ssh://aur@aur.archlinux.org/bottles-git.git
-  [[ ! -d $GITDIR ]] && git clone https://github.com/talebian12/bottles-git
+  if [ ! -d $VERDIR ]
+  then
+	  git clone https://github.com/bottlesdevs/Bottles
+  fi
+  if [ ! -d $AURDIR ]
+  then
+	  git clone ssh://aur@aur.archlinux.org/bottles-git.git bottles-git
+  fi
+  if [ ! -d $GITDIR ]
+  then
+	  git clone https://github.com/talebian12/bottles-git bottles-git-github
+  fi
 }
 
 getver () {
@@ -27,7 +36,7 @@ updatepkg() {
   sed -i "s/pkgver=2.*/pkgver=2.$VER/g" PKGBUILD
   sed -i "s/^_ver=.*/_ver=$VER/g" PKGBUILD
   cat PKGBUILD
-  sed -i "s/^pkgver = 2.*/pkgver = 2.$VER" .SRCINFO
+  sed -i "s/pkgver = 2.*/pkgver = 2.$VER/g" .SRCINFO
   cat .SRCINFO
 
   cp PKGBUILD $GITDIR

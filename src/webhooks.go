@@ -31,10 +31,10 @@ func SetupWebhooks(action fn) {
         fmt.Println("\n======WEBHOOK======\n")
         fmt.Printf("%+v\n", release)
       case github.PushPayload:
-        push := payload.(github.PushPayload)
+	//push := payload.(github.PushPayload)
         fmt.Println("\n======WEBHOOK======\n")
         action()
-        fmt.Printf("%+v\n", push)
+        //fmt.Printf("%+v\n", push)
     }
 
   })
