@@ -12,7 +12,7 @@ const (
   path = "/webhooks"
 )
 
-func setup_webhooks() {
+func SetupWebhooks() {
   hook, _ := github.New(github.Options.Secret(os.Getenv("GH_SECRET")))
   
   http.HandleFunc(path, func(rw http.ResponseWriter, r *http.Request) {
@@ -26,10 +26,12 @@ func setup_webhooks() {
     switch payload.(type) {
       case github.ReleasePayload:
         release := payload.(github.ReleasePayload)
-        fmt.Printf("%+v", release)
+        fmt.Println("\n======WEBHOOK======\n")
+        fmt.Printf("%+v\n", release)
       case github.PushPayload:
         push := payload.(github.PushPayload)
-        fmt.Printf("%+v", push)
+        fmt.Println("\n======WEBHOOK======\n")
+        fmt.Printf("%+v\n", push)
     }
 
   })
